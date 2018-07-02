@@ -93,6 +93,7 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
     private static final int TRIPS_LIST = 10;
     private static final int SAVE_TRIP_NOT_AVAILABLE = 11;
     private static final int REQUEST_ENABLE_BT = 1234;
+    public static final int SEARCH=12;
     private static boolean bluetoothDefaultIsEnable = false;
 
     static {
@@ -419,6 +420,7 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
         menu.add(0, GET_DTC, 0, getString(R.string.menu_get_dtc));
         menu.add(0, TRIPS_LIST, 0, getString(R.string.menu_trip_list));
         menu.add(0, SETTINGS, 0, getString(R.string.menu_settings));
+        menu.add(0,SEARCH,0,"IBM API");
         return true;
     }
 
@@ -439,6 +441,11 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
             case TRIPS_LIST:
                 startActivity(new Intent(this, TripListActivity.class));
                 return true;
+            case SEARCH:
+                startActivity(new Intent(this, Search.class));
+                return true;
+
+
         }
         return false;
     }
