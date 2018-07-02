@@ -107,4 +107,5 @@
     <string name="pref_dev_email_summary">Logs will be emailed to this address</string>
     <string name="text_noerrors">There were no errors found.!</string>
     <string name="ibm_api">IBM Error Search</string>
+    <string name="german">German</string>
 </resources>
