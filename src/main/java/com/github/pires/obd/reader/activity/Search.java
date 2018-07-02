@@ -6,9 +6,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,10 +24,16 @@ import com.github.pires.obd.reader.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 
 public class Search extends Activity {
 
-   static TextView result;
+
+
+    private static ArrayAdapter<String> adapter;
+    private static ArrayList<String> itemList = new ArrayList<>();
+     Button Search_btn=null;
 
 
     @Override
@@ -34,18 +41,20 @@ public class Search extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         final ApiHelper apiHelper=new ApiHelper(this);
-        result= (TextView)findViewById(R.id.result_tv);
-        EditText editText_code = (EditText) findViewById(R.id.error_code);
-        final Button Search_btn= (Button) findViewById(R.id.button_search);
+
+        final EditText editText_code = (EditText) findViewById(R.id.error_code);
+        Search_btn= (Button) findViewById(R.id.button_search);
+        initViewElements();
         Search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Search_btn.setEnabled(false);
 
 
-                String dct[]={"p0110"};
+                String dcts[]=editText_code.getText().toString().split(",");
+                String dct[]={"p0110","p0170","p0148","p0210","p0335","p0750","p0750"};
 
-                apiHelper.getErrorCodeTranslation(dct,"WBAES26C05D","English");
+                apiHelper.getErrorCodeTranslation(dcts,"WBAES26C05D","English");
 
 
 
@@ -56,9 +65,30 @@ public class Search extends Activity {
         });
     }
 
+    private void initViewElements() {
+//        if(getSupportActionBar()!=null)
+//            getSupportActionBar().setTitle(R.string.translation_result);
+        ListView listView = (ListView) findViewById(R.id.output);
+        adapter = new ResultAdapter(this, itemList);
+        listView.setAdapter(adapter);
+        clearListView();
+    }
 
+    public static void addListItem(String value){
+        itemList.add(value);
+        adapter.notifyDataSetChanged();
+    }
+
+    private static void clearListView(){
+        itemList.clear();
+        adapter.notifyDataSetChanged();
+    }
 
 };
+
+
+
+
 
 
     class ApiHelper extends Application {
@@ -237,8 +267,8 @@ public class Search extends Activity {
                             public void onResponse(JSONObject response) {
                                 Log.d(TAG, response.toString());
 
-                                updateGui(errorCode + "\n" + formatDtcTranslation(response, lang));
-                                //ResponseActivity.addListItem(errorCode + "\n" + formatDtcTranslation(response, lang));
+
+                                Search.addListItem(errorCode + "\n" + formatDtcTranslation(response, lang));
                             }
                         },
                         new Response.ErrorListener() {
@@ -246,8 +276,8 @@ public class Search extends Activity {
                             public void onErrorResponse(VolleyError error) {
                                 if (error instanceof ServerError)
 
-                                    updateGui(errorCode + "\n" + "Server Error occured (Status Code: " + error.networkResponse.statusCode + ")");
-                                    //ResponseActivity.addListItem(errorCode + "\n" + "Server Error occured (Status Code: " + error.networkResponse.statusCode + ")");
+
+                                    Search.addListItem(errorCode + "\n" + "Server Error occured (Status Code: " + error.networkResponse.statusCode + ")");
                                 VolleyLog.e(error.toString());
                             }
                         });
@@ -255,9 +285,7 @@ public class Search extends Activity {
             return null;
         }
 
-        private void updateGui(String s) {
-            Search.result.setText(s);
-        }
+
 
 
     }
