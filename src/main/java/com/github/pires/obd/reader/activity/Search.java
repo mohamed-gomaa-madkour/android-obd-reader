@@ -43,18 +43,25 @@ public class Search extends Activity {
         final ApiHelper apiHelper=new ApiHelper(this);
 
         final EditText editText_code = (EditText) findViewById(R.id.error_code);
+         final EditText vinInputField = ((EditText) findViewById(R.id.vin_input));
         Search_btn= (Button) findViewById(R.id.button_search);
         initViewElements();
         Search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Search_btn.setEnabled(false);
+                clearListView();
+                String vin="";
+
 
 
                 String dcts[]=editText_code.getText().toString().split(",");
-                String dct[]={"p0110","p0170","p0148","p0210","p0335","p0750","p0750"};
 
-                apiHelper.getErrorCodeTranslation(dcts,"WBAES26C05D","English");
+                if (vinInputField.getText().toString().equals("")) vin="WBAES26C05D";
+
+
+                apiHelper.getErrorCodeTranslation(dcts,vin,"English");
+                Search_btn.setEnabled(true);
 
 
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="50dp"
@@ -8,14 +9,19 @@
 
     <TextView
         android:id="@+id/text1"
-        android:textStyle="bold"
-        android:textSize="14sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="@color/dim_foreground_material_light"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="code" />
+
     <TextView
         android:id="@+id/text2"
-        android:textSize="14sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="@color/dim_foreground_material_light"
+        android:textSize="16sp"
+        tools:text="system" />
 
 </LinearLayout>
