@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +44,7 @@ public class Search extends Activity {
         final ApiHelper apiHelper=new ApiHelper(this);
 
         final EditText editText_code = (EditText) findViewById(R.id.error_code);
+        editText_code.requestFocus();
          final EditText vinInputField = ((EditText) findViewById(R.id.vin_input));
         Search_btn= (Button) findViewById(R.id.button_search);
         initViewElements();
@@ -50,6 +52,8 @@ public class Search extends Activity {
             @Override
             public void onClick(View view) {
                 Search_btn.setEnabled(false);
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(Search_btn.getWindowToken(), 0);
                 clearListView();
                 String vin="";
 

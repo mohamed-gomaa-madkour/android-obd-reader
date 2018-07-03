@@ -52,6 +52,7 @@
             android:ems="10"
             android:hint="Error Code"
             android:inputType="textPersonName"
+            android:selectAllOnFocus="false"
             app:layout_constraintEnd_toStartOf="@+id/button_search"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
