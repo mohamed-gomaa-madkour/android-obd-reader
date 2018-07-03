@@ -1,1 +1,1 @@
-include ':volley-1.1.0'
+include ':volley-1.1.0', ':speedviewlib-release'

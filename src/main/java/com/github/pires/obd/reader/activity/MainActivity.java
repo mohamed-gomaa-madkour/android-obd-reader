@@ -281,6 +281,8 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
         if (vv.findViewWithTag(cmdID) != null) {
             TextView existingTV = (TextView) vv.findViewWithTag(cmdID);
             existingTV.setText(cmdResult);
+
+
         } else addTableRow(cmdID, cmdName, cmdResult);
         commandResult.put(cmdID, cmdResult);
         updateTripStatistic(job, cmdID);

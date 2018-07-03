@@ -58,6 +58,11 @@
             android:text="" />
     </TableRow>
 
+    <com.github.anastr.speedviewlib.SpeedView
+        android:id="@+id/speedView"
+        android:layout_width="wrap_content"
+        android:layout_height="160dp" />
+
     <ScrollView
         android:id="@+id/data_scroll"
         android:layout_width="fill_parent"
