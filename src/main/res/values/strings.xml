@@ -108,4 +108,6 @@
     <string name="text_noerrors">There were no errors found.!</string>
     <string name="ibm_api">IBM Error Search</string>
     <string name="german">German</string>
+    <string name="menu_action_setting">setting</string>
+    <string name="menu_action_about_us">About US</string>
 </resources>
