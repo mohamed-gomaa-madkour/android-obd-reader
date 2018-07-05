@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/vehicle_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -58,11 +58,6 @@
             android:text="" />
     </TableRow>
 
-    <com.github.anastr.speedviewlib.SpeedView
-        android:id="@+id/speedView"
-        android:layout_width="wrap_content"
-        android:layout_height="160dp" />
-
     <ScrollView
         android:id="@+id/data_scroll"
         android:layout_width="fill_parent"
@@ -73,11 +68,73 @@
         android:elevation="2dp"
         android:outlineProvider="bounds">
 
-        <TableLayout
-            android:id="@+id/data_table"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="*"></TableLayout>
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.github.anastr.speedviewlib.AwesomeSpeedometer
+                    android:id="@+id/awesomeSpeedometer"
+                    android:layout_width="183dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+
+                    android:padding="8dp"
+                    app:sv_indicator="HalfLineIndicator" />
+
+                <com.github.anastr.speedviewlib.AwesomeSpeedometer
+                    android:id="@+id/awesomeSpeedometer2"
+                    android:layout_width="183dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+
+                    android:padding="8dp"
+                    app:sv_indicator="HalfLineIndicator" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.github.anastr.speedviewlib.AwesomeSpeedometer
+                    android:id="@+id/awesomeSpeedometer4"
+                    android:layout_width="183dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+
+                    android:padding="8dp"
+                    app:sv_indicator="HalfLineIndicator" />
+
+                <com.github.anastr.speedviewlib.AwesomeSpeedometer
+                    android:id="@+id/awesomeSpeedometer3"
+                    android:layout_width="183dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+
+                    android:padding="8dp"
+                    app:sv_indicator="HalfLineIndicator" />
+            </LinearLayout>
+
+            <TableLayout
+                android:id="@+id/data_table"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"></TableLayout>
+
+        </LinearLayout>
+
+
     </ScrollView>
 
     <TableRow

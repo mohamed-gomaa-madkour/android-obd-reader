@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -37,7 +38,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import com.github.anastr.speedviewlib.AwesomeSpeedometer;
 import com.github.pires.obd.commands.ObdCommand;
 import com.github.pires.obd.commands.SpeedCommand;
 import com.github.pires.obd.commands.engine.RPMCommand;
@@ -60,6 +61,7 @@ import com.google.inject.Inject;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -80,6 +82,7 @@ import static com.github.pires.obd.reader.activity.ConfigActivity.getGpsUpdatePe
 
 @ContentView(R.layout.main)
 public class MainActivity extends RoboActivity implements ObdProgressListener, LocationListener, GpsStatus.Listener {
+
 
     private static final String TAG = MainActivity.class.getName();
     private static final int NO_BLUETOOTH_ID = 0;
@@ -282,10 +285,105 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
             TextView existingTV = (TextView) vv.findViewWithTag(cmdID);
             existingTV.setText(cmdResult);
 
+            Log.e(TAG, "######################"+cmdID);
+          //  if(cmdID.equals("SPEED")) {speedometer.speedTo(50); Log.e(TAG, "$$$$$$$$$$$$$$$$$$$$$$$"+cmdID); }
 
-        } else addTableRow(cmdID, cmdName, cmdResult);
+
+        } else {
+            addTableRow(cmdID, cmdName, cmdResult);
+
+            Log.e(TAG, "//////////////////////"+cmdID);
+
+
+
+
+
+        };
         commandResult.put(cmdID, cmdResult);
         updateTripStatistic(job, cmdID);
+    }
+
+    void GaugesGui(){
+
+
+        AwesomeSpeedometer awesomeSpeedometer= (AwesomeSpeedometer) findViewById(R.id.awesomeSpeedometer);
+
+        awesomeSpeedometer.setMinSpeed(0);
+        awesomeSpeedometer.setMaxSpeed(200);
+        awesomeSpeedometer.setIndicatorColor(Color.WHITE);
+        List<Float> ticks=new ArrayList<Float>();
+        ticks.add((float) 0);
+        ticks.add((float) 20);
+        ticks.add((float) 40);
+        ticks.add((float) 60);
+        ticks.add((float) 80);
+        ticks.add((float) 100);
+        ticks.add((float) 120);
+        ticks.add((float) 140);
+        ticks.add((float) 160);
+        ticks.add((float) 180);
+        awesomeSpeedometer.setTicks(ticks);
+        awesomeSpeedometer.speedTo(50);
+        awesomeSpeedometer.setEndDegree(432);
+        awesomeSpeedometer.setStartDegree(108);
+        awesomeSpeedometer.setIndicatorWidth(20);
+
+
+
+
+        AwesomeSpeedometer awesomeSpeedometer2= (AwesomeSpeedometer) findViewById(R.id.awesomeSpeedometer2);
+        awesomeSpeedometer2.setIndicatorColor(Color.WHITE);
+        awesomeSpeedometer2.setMinSpeed(0);
+        awesomeSpeedometer2.setMaxSpeed(8);
+        awesomeSpeedometer2.setIndicatorColor(Color.WHITE);
+        List<Float> ticks2=new ArrayList<Float>();
+        ticks2.add((float) 0);
+        ticks2.add((float) 1);
+        ticks2.add((float) 2);
+        ticks2.add((float) 3);
+        ticks2.add((float) 4);
+        ticks2.add((float) 5);
+        ticks2.add((float) 6);
+        ticks2.add((float) 7);
+        ticks2.add((float) 8);
+        awesomeSpeedometer2.setTicks(ticks2);
+        awesomeSpeedometer2.speedTo(3);
+        awesomeSpeedometer2.setUnit("RPM x1000");
+        awesomeSpeedometer2.setWithTremble(false);
+        awesomeSpeedometer2.setStartDegree(180-80);
+        awesomeSpeedometer2.setEndDegree(360+80);
+        awesomeSpeedometer2.getIndicatorWidth();
+        awesomeSpeedometer2.setIndicatorWidth(20);
+        Log.e("mohamed","+++++++++++++++"+ awesomeSpeedometer2.getIndicatorWidth());
+
+
+
+
+
+        AwesomeSpeedometer awesomeSpeedometer3= (AwesomeSpeedometer) findViewById(R.id.awesomeSpeedometer3);
+        awesomeSpeedometer3.setIndicatorColor(Color.WHITE);
+        awesomeSpeedometer3.speedTo(30);
+        awesomeSpeedometer3.setWithTremble(false);
+        awesomeSpeedometer3.setUnit("Throttle %");
+        awesomeSpeedometer3.setEndDegree(432);
+        awesomeSpeedometer3.setStartDegree(108);
+        awesomeSpeedometer3.setIndicatorWidth(20);
+
+
+
+        AwesomeSpeedometer awesomeSpeedometer4= (AwesomeSpeedometer) findViewById(R.id.awesomeSpeedometer4);
+        awesomeSpeedometer4.setIndicatorColor(Color.WHITE);
+        awesomeSpeedometer4.speedTo(30);
+        awesomeSpeedometer4.setWithTremble(false);
+        awesomeSpeedometer4.setUnit("Engine Load %");
+        awesomeSpeedometer4.setEndDegree(432);
+        awesomeSpeedometer4.setStartDegree(108);
+        awesomeSpeedometer4.setIndicatorWidth(20);
+
+
+
+
+
     }
 
     private boolean gpsInit() {
@@ -327,6 +425,7 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         final BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
         if (btAdapter != null)
             bluetoothDefaultIsEnable = btAdapter.isEnabled();
@@ -342,6 +441,7 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
         triplog = TripLog.getInstance(this.getApplicationContext());
         
         obdStatusTextView.setText(getString(R.string.status_obd_disconnected));
+        GaugesGui();
     }
 
     @Override
