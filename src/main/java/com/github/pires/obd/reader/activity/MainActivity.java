@@ -61,7 +61,6 @@ import com.google.inject.Inject;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -113,6 +112,12 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
     /// the trip log
     private TripLog triplog;
     private TripRecord currentTrip;
+
+    //gauges
+    AwesomeSpeedometer speedMeter;
+    AwesomeSpeedometer rpmMeter;
+    AwesomeSpeedometer throttleMeter;
+    AwesomeSpeedometer loadMeter;
 
     @InjectView(R.id.compass_text)
     private TextView compass;
@@ -286,7 +291,12 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
             existingTV.setText(cmdResult);
 
             Log.e(TAG, "######################"+cmdID);
+            updateGauges(cmdID,cmdResult);
+
+
+
           //  if(cmdID.equals("SPEED")) {speedometer.speedTo(50); Log.e(TAG, "$$$$$$$$$$$$$$$$$$$$$$$"+cmdID); }
+
 
 
         } else {
@@ -305,84 +315,65 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
 
     void GaugesGui(){
 
-
-        AwesomeSpeedometer awesomeSpeedometer= (AwesomeSpeedometer) findViewById(R.id.awesomeSpeedometer);
-
-        awesomeSpeedometer.setMinSpeed(0);
-        awesomeSpeedometer.setMaxSpeed(200);
-        awesomeSpeedometer.setIndicatorColor(Color.WHITE);
-        List<Float> ticks=new ArrayList<Float>();
-        ticks.add((float) 0);
-        ticks.add((float) 20);
-        ticks.add((float) 40);
-        ticks.add((float) 60);
-        ticks.add((float) 80);
-        ticks.add((float) 100);
-        ticks.add((float) 120);
-        ticks.add((float) 140);
-        ticks.add((float) 160);
-        ticks.add((float) 180);
-        awesomeSpeedometer.setTicks(ticks);
-        awesomeSpeedometer.speedTo(50);
-        awesomeSpeedometer.setEndDegree(432);
-        awesomeSpeedometer.setStartDegree(108);
-        awesomeSpeedometer.setIndicatorWidth(20);
+        speedMeter= (AwesomeSpeedometer) findViewById(R.id.awesomeSpeedometer);
+        speedMeter.setMinSpeed(0);
+        speedMeter.setMaxSpeed(180);
+        speedMeter.setIndicatorColor(Color.WHITE);
+        speedMeter.setWithTremble(false);
+        speedMeter.setTickNumber(10);
+        speedMeter.setEndDegree(432);
+        speedMeter.setStartDegree(108);
+        speedMeter.setIndicatorWidth(20);
 
 
 
 
-        AwesomeSpeedometer awesomeSpeedometer2= (AwesomeSpeedometer) findViewById(R.id.awesomeSpeedometer2);
-        awesomeSpeedometer2.setIndicatorColor(Color.WHITE);
-        awesomeSpeedometer2.setMinSpeed(0);
-        awesomeSpeedometer2.setMaxSpeed(8);
-        awesomeSpeedometer2.setIndicatorColor(Color.WHITE);
-        List<Float> ticks2=new ArrayList<Float>();
-        ticks2.add((float) 0);
-        ticks2.add((float) 1);
-        ticks2.add((float) 2);
-        ticks2.add((float) 3);
-        ticks2.add((float) 4);
-        ticks2.add((float) 5);
-        ticks2.add((float) 6);
-        ticks2.add((float) 7);
-        ticks2.add((float) 8);
-        awesomeSpeedometer2.setTicks(ticks2);
-        awesomeSpeedometer2.speedTo(3);
-        awesomeSpeedometer2.setUnit("RPM x1000");
-        awesomeSpeedometer2.setWithTremble(false);
-        awesomeSpeedometer2.setStartDegree(180-80);
-        awesomeSpeedometer2.setEndDegree(360+80);
-        awesomeSpeedometer2.getIndicatorWidth();
-        awesomeSpeedometer2.setIndicatorWidth(20);
-        Log.e("mohamed","+++++++++++++++"+ awesomeSpeedometer2.getIndicatorWidth());
+        rpmMeter= (AwesomeSpeedometer) findViewById(R.id.awesomeSpeedometer2);
+        rpmMeter.setMinSpeed(0);
+        rpmMeter.setMaxSpeed(8);
+        rpmMeter.setIndicatorColor(Color.WHITE);
+        rpmMeter.setTickNumber(9);
+        rpmMeter.speedTo(3);
+        rpmMeter.setUnit("RPM x1000");
+        rpmMeter.setWithTremble(false);
+        rpmMeter.setStartDegree(180-80);
+        rpmMeter.setEndDegree(360+80);
+        rpmMeter.getIndicatorWidth();
+        rpmMeter.setIndicatorWidth(20);
+
+        throttleMeter= (AwesomeSpeedometer) findViewById(R.id.awesomeSpeedometer3);
+        throttleMeter.setIndicatorColor(Color.WHITE);
+        throttleMeter.speedTo(30);
+        throttleMeter.setTickNumber(11);
+        throttleMeter.setWithTremble(false);
+        throttleMeter.setUnit("Throttle %");
+        throttleMeter.setEndDegree(432);
+        throttleMeter.setStartDegree(108);
+        throttleMeter.setIndicatorWidth(20);
 
 
 
+        loadMeter= (AwesomeSpeedometer) findViewById(R.id.awesomeSpeedometer4);
+        loadMeter.setIndicatorColor(Color.WHITE);
+        loadMeter.speedTo(30);
+        loadMeter.setTickNumber(11);
+        loadMeter.setWithTremble(false);
+        loadMeter.setUnit("Engine Load %");
+        loadMeter.setEndDegree(432);
+        loadMeter.setStartDegree(108);
+        loadMeter.setIndicatorWidth(20);
 
 
-        AwesomeSpeedometer awesomeSpeedometer3= (AwesomeSpeedometer) findViewById(R.id.awesomeSpeedometer3);
-        awesomeSpeedometer3.setIndicatorColor(Color.WHITE);
-        awesomeSpeedometer3.speedTo(30);
-        awesomeSpeedometer3.setWithTremble(false);
-        awesomeSpeedometer3.setUnit("Throttle %");
-        awesomeSpeedometer3.setEndDegree(432);
-        awesomeSpeedometer3.setStartDegree(108);
-        awesomeSpeedometer3.setIndicatorWidth(20);
-
-
-
-        AwesomeSpeedometer awesomeSpeedometer4= (AwesomeSpeedometer) findViewById(R.id.awesomeSpeedometer4);
-        awesomeSpeedometer4.setIndicatorColor(Color.WHITE);
-        awesomeSpeedometer4.speedTo(30);
-        awesomeSpeedometer4.setWithTremble(false);
-        awesomeSpeedometer4.setUnit("Engine Load %");
-        awesomeSpeedometer4.setEndDegree(432);
-        awesomeSpeedometer4.setStartDegree(108);
-        awesomeSpeedometer4.setIndicatorWidth(20);
-
-
-
-
+    }
+    void updateGauges(String id,String value){
+        if(id.equals("SPEED"))
+        { speedMeter.speedTo(Float.parseFloat(value.replace("km/h",""))); Log.e("mohamed",value.replace("km/h",""));}
+        if(id.equals("THROTTLE_POS"))
+        { throttleMeter.speedTo(Float.parseFloat(value.replace("%","")));Log.e("mohamed",value.replace("%",""));}
+        if(id.equals("ENGINE_RPM"))
+        { rpmMeter.speedTo(Float.parseFloat(value.replace("RPM","")));Log.e("mohamed",value.replace("RPM",""));}
+        if(id.equals("ENGINE_LOAD"))
+        { loadMeter.speedTo(Float.parseFloat(value.replace("%","")));Log.e("mohamed",value.replace("%",""));}
 
     }
 
