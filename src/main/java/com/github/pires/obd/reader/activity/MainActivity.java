@@ -371,7 +371,7 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
         if(id.equals("THROTTLE_POS"))
         { throttleMeter.speedTo(Float.parseFloat(value.replace("%","")));Log.e("mohamed",value.replace("%",""));}
         if(id.equals("ENGINE_RPM"))
-        { rpmMeter.speedTo(Float.parseFloat(value.replace("RPM","")));Log.e("mohamed",value.replace("RPM",""));}
+        { rpmMeter.speedTo(Float.parseFloat(value.replace("RPM",""))/1000);Log.e("mohamed",value.replace("RPM",""));}
         if(id.equals("ENGINE_LOAD"))
         { loadMeter.speedTo(Float.parseFloat(value.replace("%","")));Log.e("mohamed",value.replace("%",""));}
 

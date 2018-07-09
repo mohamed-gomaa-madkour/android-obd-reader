@@ -110,4 +110,5 @@
     <string name="german">German</string>
     <string name="menu_action_setting">setting</string>
     <string name="menu_action_about_us">About US</string>
+    <string name="dashboard">Dashboard</string>
 </resources>

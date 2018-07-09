@@ -24,4 +24,12 @@ public class HomeActivity extends Activity {
     public void openTripList(View view) {
         startActivity(new Intent(this, TripListActivity.class));
     }
+
+    public void openMain(View view) {
+        startActivity(new Intent(this, MainActivity.class));
+    }
+
+    public void openDiagnostics(View view) {
+        startActivity(new Intent(this,TroubleCodesActivity.class));
+    }
 }

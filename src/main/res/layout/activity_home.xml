@@ -13,7 +13,6 @@
         tools:context="com.example.android.obdscanner.HomeActivity">
 
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,8 +26,7 @@
                 android:layout_height="70dp"
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/dashboard"
-                android:onClick="openSitting"
-                />
+                android:onClick="openMain" />
 
 
             <Button
@@ -37,8 +35,7 @@
                 android:layout_height="70dp"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/diagnostic"
-                android:onClick="openApi"
-                />
+                android:onClick="openDiagnostics" />
 
             <Button
                 android:id="@+id/history"
@@ -46,13 +43,12 @@
                 android:layout_height="70dp"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/history"
-                android:onClick="openTripList"
-                />
+                android:onClick="openTripList" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="307dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="40dp">
@@ -76,14 +72,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="History"
+                android:text="Trip History"
                 android:textColor="@color/obd"
                 android:textSize="15sp" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
@@ -94,35 +90,39 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_alignParentLeft="true"
-                android:background="@drawable/car" />
-
+                android:background="@drawable/car"
+                android:onClick="openApi" />
 
             <Button
-                android:id="@+id/sensors"
+                android:id="@+id/sittings"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/sensors" />
+                android:background="@drawable/settings2"
+                android:onClick="openSitting" />
+
 
             <Button
-                android:id="@+id/settings"
+                android:id="@+id/about"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/settings2" />
+                android:layout_alignParentTop="true"
+                android:background="@drawable/about" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="307dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginRight="40dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Car Info"
+                android:text="IBM DTC"
                 android:textColor="@color/obd"
                 android:textSize="15sp" />
 
@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="Sensors"
+                android:text="Sitting"
                 android:textColor="@color/obd"
                 android:textSize="15sp" />
 
@@ -138,12 +138,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="Settings"
+                android:text="About us"
                 android:textColor="@color/obd"
                 android:textSize="15sp" />
 
         </RelativeLayout>
 
     </LinearLayout>
+
+
 
 </ScrollView>
