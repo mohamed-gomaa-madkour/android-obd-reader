@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="Sitting"
+                android:text="Settings"
                 android:textColor="@color/obd"
                 android:textSize="15sp" />
 
